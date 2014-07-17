@@ -1,0 +1,19 @@
+<div id="content" class="container" ng-controller="ArticleCtrl">  
+  <div class="row">
+    <div class="col-md-10">
+      <div class="main-content-area">
+        <div class="col-md-9 col-md-offset-1">
+          <div class="main-heading">
+            <h2 class="title">Articles</h2>
+          </div>
+          <ul>
+            <% @articles.each do |article| %>
+              <li><%= link_to article.title, article %></li>
+            <% end %>
+          </ul>
+          <%= link_to "New article", new_article_path %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

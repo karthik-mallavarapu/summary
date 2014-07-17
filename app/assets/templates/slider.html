@@ -1,0 +1,29 @@
+<div class="slider">
+  <div class="slide" ng-repeat="article in articles" ng-show="article.visible">
+    <div class="slide-btns">
+      <div class="row">
+      <div class="col-md-1">
+      <button type="button" class="btn btn-primary btn-md pull-left"  ng-click="prev()"> 
+        <span class="glyphicon glyphicon-arrow-left"></span>
+      </button>
+      </div>
+      <div class="col-md-8 col-md-offset-1">
+        <h3 class="slider-title">{{article.title}}</h3>
+      </div>
+      <div class="col-md-offset-1">
+      <button type="button" class="btn btn-primary btn-md pull-right"  ng-click="next()">
+        <span class="glyphicon glyphicon-arrow-right"></span>
+      </button>
+      </div>
+      
+      </div>
+    </div> 
+    <div class="row"> 
+      <img ng-src="{{article.img}}" class="slider-img">
+    </div>
+    <div class="caption row">
+      {{article.summary}}
+    </div>
+  </div>
+  
+</div>

@@ -1,0 +1,146 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require bootstrap
+ *= require_self
+ *= require_tree .
+ *= require font-awesome
+ *= require flipclock
+ */
+
+//.main-content-area {
+//  border-right: 1px dashed #333;
+//}
+
+.main-heading { 
+  margin-top:30px;
+  text-align: left;
+ }
+
+ .article {
+  margin-top: 40px;
+ }
+
+ .slide.ng-hide-add,
+.slide.ng-hide-remove {
+  -webkit-transition: all 1.0s ease-in-out;
+  -moz-transition: all 1.0s ease-in-out;
+  -o-transition: all 1.0s ease-in-out;
+  transition: all 1.0s ease-in-out;
+  display: block!important;
+}
+.slide.ng-hide-add.ng-hide-add-active,
+.slide.ng-hide-remove {
+  opacity: 0;
+}
+.slide.ng-hide-add,
+.slide.ng-hide-remove.ng-hide-remove-active {
+  opacity: 1;
+}
+
+.slider-img {
+  background-position: center;
+  width: 400px;
+  height: 300px;
+  margin-left: 100px;
+  margin-top: 10px;
+}
+
+.slider-title {
+  font-family: bariol;
+  color: #1f57a5;
+  margin-top: 0px;
+  margin-right: -20px;
+}
+.jumbotron {
+  background:transparent;
+}
+
+.panel-digest { 
+  height: 600px;
+  .digest {
+    margin-top: 20px;
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  .caption {
+    margin-top: 10px;
+  }
+ }
+
+ .slider-size {
+  height: 400px;
+ }
+
+ .slide-btns {
+  position: relative;
+  margin-bottom: 20px;
+ }
+
+#footer {
+  position: relative;
+  margin-bottom: -100px;
+  height: 150px;
+  clear:both;
+  padding-top: 100px;
+}
+
+#navbar {
+  background: transparent;
+}
+
+.navbar-default .navbar-brand {
+  color: #1f57a5;
+}
+
+.news-article {
+  position: relative;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  overflow: visible;  
+}
+
+.main-title {
+  font-family: bariol;
+  color: #1f57a5; 
+}
+
+.article-title {
+  font-size: 24px;
+  color: #1f57a5;
+  margin-left: 20px;
+  text-align: left;
+}
+
+.article-text {
+  margin-left: 20px;
+  font-family: bariol;
+  font-size: 16px;
+  text-align: left;
+}
+
+.article-img {
+  margin-top: 20px;
+  margin-right: 20px;
+  width: 180px;
+  height: 130px;    
+}
+
+.source {
+  float: right;
+  font-style: italic;
+  margin-bottom: 30px;
+}
+
+.border {
+  border-top: 5px solid #1f57a5;
+}

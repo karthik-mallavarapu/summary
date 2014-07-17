@@ -1,0 +1,13 @@
+<%= form_for(@article, class: 'form-horizontal') do |f| %>
+  <div class="form-group">
+    <%= f.label :title %>  
+    <%= f.text_field :title, class: "form-control", placeholder: "Title", required: true %>
+  </div>
+    <div class="form-group">
+      <%= f.label :content %>  
+      <%= f.text_area :content, class: "form-control", placeholder: "Text", rows: "12", required: true %>
+    </div>
+    <div class="form-group">
+      <%= f.submit class: "btn" %>
+    </div>
+<% end %>

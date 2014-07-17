@@ -1,0 +1,23 @@
+<div id="content" class="container" ng-controller="ArticleCtrl">  
+  <div class="main-heading">
+    <h2 class="title">Summarize</h2>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="main-content-area">
+        <div class="col-md-9 col-md-offset-2">
+          <div ng-show="state=='processing'">
+          <i class="fa fa-refresh fa-spin fa-2x"></i>
+          </div>
+          <%= render "partials/article" %>
+          <%= render "partials/form" %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="side-content-area">
+        <%= render "partials/summary" %>
+      </div>
+    </div>
+  </div>
+</div>

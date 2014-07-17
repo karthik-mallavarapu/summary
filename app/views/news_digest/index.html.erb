@@ -1,0 +1,25 @@
+<div id="content" class="container" ng-controller="DigestCtrl">  
+  <div class="main-heading">
+    <h1 class="main-title"><%= @edition %></h2>
+    <small><%= @edition.split('-')[1] %></small>
+  </div>
+  <div class="row">
+    <div class="col-md-8">
+      <div class="panel panel-default panel-digest">
+        <div class="panel-body">
+          <%= render "digest" %>
+        </div>
+      </div>
+      <%= render "news_detail" %>
+    </div>
+    <!--
+    <div class="col-md-4">
+      <div class="panel panel-default panel-digest">
+        <div class="panel-body">
+          <%= render "sidebar" %>
+        </div>
+      </div>
+    </div>
+  -->
+  </div>
+</div>

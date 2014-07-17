@@ -1,0 +1,1 @@
+Summarizer = angular.module('Summarizer', [])

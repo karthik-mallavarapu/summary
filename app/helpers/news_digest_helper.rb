@@ -1,0 +1,2 @@
+module NewsDigestHelper
+end
