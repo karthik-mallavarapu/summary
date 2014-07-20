@@ -6,11 +6,9 @@ module NewsCrawler
 
   BASE_URL = 'http://www.thehindu.com/template/1-0-1/widget/archive/archiveWebDayRest.jsp?'
 
-  include Treat::Core::DSL
-
   def get_article_urls(date='today')
     # News categories..pre-defined in topics.yml file..
-    news_topics = YAML.load_file("#{Rails.root}/config/topics.yml")['Topics']
+    news_topics = Konstants.topic_list
     article_urls = Hash.new
 
     # HTTP request to get a list of all the articles for the given date.
@@ -18,12 +16,20 @@ module NewsCrawler
     timestamp = Time.now.getutc.to_i
     page = get_page("#{BASE_URL}d=#{date}&_=#{timestamp}")
     # Collect article urls for topics in topics.yml
-    news_topics.each do |topic, count|
-      if page.css("li[data-section=#{topic}]").size > 0
-        topic_links = page.css("li[data-section=#{topic} a]").map {|li| li['href']}
-        article_urls[topic] = topic_links
+    begin
+      news_topics.each do |main_topic, subtopics|
+        subtopics.each do |topic, count|
+          if page.css("li[data-section='#{topic}']").size > 0            
+            links = page.css("li[data-section='#{topic}'] a").map {|li| li['href']}
+            article_urls[topic] = links
+          end
+        end
       end
+    rescue Exception => e
+      puts e.to_s
+      print e.backtrace.join("\n")
     end
+    return article_urls
   end
 
   # Fetch title, text and image for an article
@@ -31,8 +37,9 @@ module NewsCrawler
     article = Hash.new
     page = get_page(url)
     article['title'] = get_title(page)
-    article['text'] = get_text(page)
+    article['content'] = get_text(page)
     article['img'] = get_img(page)
+    article['last_updated'] = get_last_updated(page)
     return article
   end
 
@@ -63,8 +70,20 @@ module NewsCrawler
   def get_img(page)
     if img = page.at_css('img.main-image')
       return img['src']
+    elsif img = page.at_css('div#pic img')
+      return img['src']
     end
     return '/assets/no.png'
+  end
+
+  def get_last_updated(page)
+    begin
+      updated = page.css('div.artPubUpdate').text.strip
+      time = Chronic.parse(updated.split('Updated: ')[1])
+      return time.getutc.to_i
+    rescue Exception => e
+      puts "Last updated not found"
+    end
   end
 
 end

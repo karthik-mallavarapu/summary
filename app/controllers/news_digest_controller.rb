@@ -13,7 +13,7 @@ class NewsDigestController < ApplicationController
     @digest.articles.each do |article|
       articles << {'title' => article.title, 'img' => article.img, 'summary' => article.summary.split("\n\n")[0]}
     end
-    render json: articles
+    render json: {articles: articles, updated_at: @digest.created_at.to_s}
   end
 
 end

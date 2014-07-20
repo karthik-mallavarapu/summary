@@ -14,7 +14,12 @@ angular.module('Summarizer')
         method: 'GET'
       })
       .success (data, status, headers, config) ->
-        $scope.articles = data
+        $scope.articles = data.articles
+        d = new Date(data.updated_at)
+        updated = "Updated at: "+ ("0" + d.getHours()).slice(-2) + ':'
+        updated += ("0" + d.getMinutes()).slice(-2) + ':'
+        updated += ("0" + d.getSeconds()).slice(-2)
+        $scope.updated_at = updated
         $scope.articles[0].visible=true
       .error (data, status, headers, config) ->
         $scope.state = 'error'

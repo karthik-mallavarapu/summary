@@ -47,6 +47,11 @@ GEM
     diff-lcs (1.2.5)
     erubis (2.7.0)
     execjs (2.2.0)
+    factory_girl (4.4.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.4.1)
+      factory_girl (~> 4.4.0)
+      railties (>= 3.0.0)
     flipclockjs-rails (0.5.5.1)
       jquery-rails (>= 1.0.17)
     font-awesome-sass (4.1.0)
@@ -205,6 +210,7 @@ DEPENDENCIES
   bootstrap-sass
   chronic
   coffee-rails (~> 4.0.0)
+  factory_girl_rails
   flipclockjs-rails (~> 0.5.5b.1)
   font-awesome-sass
   jbuilder (~> 2.0)

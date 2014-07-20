@@ -30,14 +30,18 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 gem 'spring',        group: :development
 gem 'treat'
 gem 'scalpel'
-gem 'pry', group: :development
 gem 'chronic'
 gem 'flipclockjs-rails', '~> 0.5.5b.1'
 gem 'resque-scheduler'
 gem 'parallel'
 gem 'nokogiri'
 gem 'tf-idf-similarity'
-gem 'rspec-rails', group: [:development, :test]
+
+group :development, :test do 
+  gem 'pry'
+  gem 'rspec-rails'
+  gem 'factory_girl_rails'
+end
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

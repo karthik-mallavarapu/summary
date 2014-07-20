@@ -1,6 +1,10 @@
 class Article < ActiveRecord::Base
 
   belongs_to :news_digest
+  validates :title, presence: true
+  validates :content, presence: true
+  validates :topic, presence: true
+  validates :url, presence: true, uniqueness: true
   
   attr_accessor :stem_words
 
