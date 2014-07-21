@@ -2,28 +2,24 @@
   <div class="slide" ng-repeat="article in articles" ng-show="article.visible">
     <div class="slide-btns">
       <div class="row">
-      <div class="col-md-1">
-      <button type="button" class="btn btn-primary btn-md pull-left"  ng-click="prev()"> 
-        <span class="glyphicon glyphicon-arrow-left"></span>
-      </button>
+        <div class="col-md-1">
+          <a class="previous btn btn-primary" ng-click="prev()">&larr; Prev</a>
+        </div>  
+        <div class="col-md-8 col-md-offset-1">
+          <h3 class="slider-title">{{article.title}}</h3>
+        </div> 
+        <div class="col-md-1">
+          <a class="next btn btn-primary" ng-click="next()">Next &rarr;</a>
+        </div>
       </div>
-      <div class="col-md-8 col-md-offset-1">
-        <h3 class="slider-title">{{article.title}}</h3>
-      </div>
-      <div class="col-md-offset-1">
-      <button type="button" class="btn btn-primary btn-md pull-right"  ng-click="next()">
-        <span class="glyphicon glyphicon-arrow-right"></span>
-      </button>
-      </div>
-      
-      </div>
-    </div> 
+    </div>
     <div class="row"> 
       <img ng-src="{{article.img}}" class="slider-img">
     </div>
-    <div class="caption row">
-      {{article.summary}}
+    <div class="slider-text row">
+      {{article.summary}} <br> <small class="source">Read more at <a target='_blank' ng-href="{{article.url}}">The Hindu</a></small>      
     </div>
+      
   </div>
   
 </div>

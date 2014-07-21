@@ -44,7 +44,9 @@ class NewsDigest < ActiveRecord::Base
     Konstants.topic_list.each do |main, subtopics|
       articles = Hash.new
       subtopics.each do |topic, count|
-        articles[topic] = Article.where(["created_at > ?", 24.hours.ago]).where(topic: topic)
+        delete_similar_articles(topic)
+        articles[topic] = Article.where(topic: topic, edition: Chronic.parse(@date).strftime('%B %d'))
+        delete_similar_articles(articles[topic])
       end
       @news_articles[main] = articles
     end
@@ -52,6 +54,27 @@ class NewsDigest < ActiveRecord::Base
       subtopics.each do |topic, articles|
         score_articles(articles)
       end      
+    end
+  end
+
+  def delete_similar_articles(topic)
+    articles = Article.where(topic: topic, edition: Chronic.parse(@date).strftime('%B %d'))
+    corpus = []
+    articles.each do |article|
+      corpus << TfIdfSimilarity::Document.new(article.content)
+    end
+    model = TfIdfSimilarity::TfIdfModel.new(corpus)
+    similarity_matrix = model.similarity_matrix.to_a
+    similarity_matrix.each_index do |i|
+      similarity_matrix[i].each_index do |j|
+        if i == j
+          next
+        end
+        if similarity_matrix[i][j] > 0.35
+          article = (articles[i].last_updated > articles[j].last_updated)? articles[j] : articles[i]
+          article.delete
+        end
+      end
     end
   end
 
@@ -65,6 +88,7 @@ class NewsDigest < ActiveRecord::Base
             article.topic = topic
             article.url = url
             article.add_summary
+            article.edition = Chronic.parse(@date).strftime('%B %d')
             article.save
           end
         rescue Exception => e

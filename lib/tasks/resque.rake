@@ -1,22 +1,27 @@
-# Resque tasks
-require 'resque/tasks'
+require "resque/tasks"
 require 'resque/scheduler/tasks'
 
+task "resque:setup" => :environment do
+  Resque.before_fork = Proc.new { ActiveRecord::Base.establish_connection }
+end
+
 namespace :resque do
-  task :setup do
-    require 'resque'
-    require 'resque-scheduler'
-
-    # you probably already have this somewhere
-    Resque.redis = 'localhost:6379'
-
-    Resque.schedule = YAML.load_file("#{Rails.root}/config/digest_schedule.yml")
-
-    # If your schedule already has +queue+ set for each job, you don't
-    # need to require your jobs.  This can be an advantage since it's
-    # less code that resque-scheduler needs to know about. But in a small
-    # project, it's usually easier to just include you job classes here.
-    # So, something like this:
-    require 'jobs'
+  desc "Clear pending tasks"
+  task :clear => :environment do
+    queues = Resque.queues
+    queues.each do |queue_name|
+      puts "Clearing #{queue_name}..."
+      Resque.redis.del "queue:#{queue_name}"
+    end
+    
+    puts "Clearing delayed..." # in case of scheduler - doesn't break if no scheduler module is installed
+    Resque.redis.keys("delayed:*").each do |key|
+      Resque.redis.del "#{key}"
+    end
+    Resque.redis.del "delayed_queue_schedule"
+    
+    puts "Clearing stats..."
+    Resque.redis.set "stat:failed", 0 
+    Resque.redis.set "stat:processed", 0
   end
 end

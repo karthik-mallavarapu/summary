@@ -4,23 +4,24 @@ angular.module('Summarizer')
     replace: true
     scope: {
       articles: '='
+      index: '='
     }
     
     link: (scope, elem, attrs) ->
       
-      scope.currentIndex = 0
+      #scope.index = 0
       scope.next = () ->
-        if scope.currentIndex < scope.articles.length - 1 
-          scope.currentIndex += 1 
+        if scope.index < scope.articles.length - 1 
+          scope.index += 1 
 
       scope.prev = () ->
-        if scope.currentIndex > 0
-          scope.currentIndex -= 1
+        if scope.index > 0
+          scope.index -= 1
 
-      scope.$watch 'currentIndex', () ->
+      scope.$watch 'index', () ->
         scope.articles.forEach (article) ->
           article.visible = false
-        scope.articles[scope.currentIndex].visible = true
+        scope.articles[scope.index].visible = true
         return
 
     templateUrl: "../../assets/slider.html"
