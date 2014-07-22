@@ -13,6 +13,10 @@ set :stages, ["production"]
 # Default deploy_to directory is /var/www/my_app
 set :deploy_to, '/root/deployment'
 
+# Set env to production
+set :rails_env, :production
+# Sym links database.yml file from shared dir
+set :linked_files, %w{config/database.yml}
 # Default value for :scm is :git
 # set :scm, :git
 
@@ -36,7 +40,7 @@ set :deploy_to, '/root/deployment'
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
-after "deploy:update_code","deploy:dbyml_symlink"
+
 
 namespace :deploy do
 
@@ -48,14 +52,7 @@ namespace :deploy do
     end
   end
 
-  desc 'Sym link the database.yml with secret passwords from shared dir to deploy dir'
-  task :dbyml_symlink do
-    rm #{release_path}/config/database.yml && 
-    ln -nfs #{deploy_to}/#{shared_dir}/config/database.yml #{release_path}/config/database.yml
-  end
-
   after :publishing, :restart
-
   after :restart, :clear_cache do
     on roles(:web), in: :groups, limit: 3, wait: 10 do
       # Here we can do anything such as:
