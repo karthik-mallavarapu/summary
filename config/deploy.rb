@@ -11,7 +11,7 @@ set :stages, ["production"]
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
 # Default deploy_to directory is /var/www/my_app
-set :deploy_to, '/root/deployment'
+set :deploy_to, '/home/deploy/deployment'
 
 # Set env to production
 set :rails_env, :production
