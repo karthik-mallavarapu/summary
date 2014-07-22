@@ -57,5 +57,5 @@ angular.module('Summarizer')
         return
       else
         $scope.index += 1        
-        $timeout($scope.slideShow, 1000)
+        $timeout($scope.slideShow, 4000)
   ]
