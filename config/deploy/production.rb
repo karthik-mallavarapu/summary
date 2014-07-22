@@ -12,7 +12,7 @@
     auth_methods: %w(publickey)
   }
 
-server "162.243.194.214", user: 'deploy', roles: %w{app web db}, primary: true
+server "162.243.194.214", user: 'deploy', roles: %w{app web db worker}, primary: true
 
 
 # Extended Server Syntax

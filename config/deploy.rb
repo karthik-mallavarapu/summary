@@ -19,6 +19,18 @@ set :rails_env, :production
 set :linked_files, %w{config/database.yml}
 
 set :default_env, { rvm_bin_path: '~/.rvm/bin' }
+
+role :resque_worker, "162.243.194.214"
+role :resque_scheduler, "162.243.194.214"
+
+set :workers, { "digest_gen_queue" => 2 }
+
+# To ensure resque can start/stop properly between deploys, you'll want to make
+# sure to link the `tmp/pids` directory.
+set :linked_dirs, %w(tmp/pids)
+
+# Uncomment this line if your workers need access to the Rails environment:
+set :resque_environment_task, true
 # Default value for :scm is :git
 # set :scm, :git
 
