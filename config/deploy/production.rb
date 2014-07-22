@@ -4,7 +4,15 @@
 # is considered to be the first unless any hosts have the primary
 # property set.  Don't declare `role :all`, it's a meta role.
 
-server "162.243.194.214", user: 'root', roles: %w{app web db}
+# Global options
+# --------------
+  set :ssh_options, {
+    keys: %w(/Users/karthik/.ssh/id_rsa),
+    forward_agent: true,
+    auth_methods: %w(publickey)
+  }
+
+server "162.243.194.214", user: 'root', roles: %w{app web db}, primary: true
 
 
 # Extended Server Syntax
@@ -19,13 +27,7 @@ server "162.243.194.214", user: 'root', roles: %w{app web db}
 # You may pass any option but keep in mind that net/ssh understands a
 # limited set of options, consult[net/ssh documentation](http://net-ssh.github.io/net-ssh/classes/Net/SSH.html#method-c-start).
 #
-# Global options
-# --------------
-#  set :ssh_options, {
-#    keys: %w(/home/rlisowski/.ssh/id_rsa),
-#    forward_agent: false,
-#    auth_methods: %w(password)
-#  }
+
 #
 # And/or per server (overrides global)
 # ------------------------------------

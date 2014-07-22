@@ -2,7 +2,7 @@
 lock '3.2.1'
 
 set :application, 'summary'
-set :repo_url, 'git@github.com:karthik-mallavarapu/summary.git'
+set :repo_url, 'https://github.com/karthik-mallavarapu/summary.git'
 set :branch, 'master'
 set :deploy_via, :remote_cache
 set :stages, ["production"]
@@ -11,7 +11,7 @@ set :stages, ["production"]
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
 # Default deploy_to directory is /var/www/my_app
-set :deploy_to, '/root/'
+set :deploy_to, '/root/deployment'
 
 # Default value for :scm is :git
 # set :scm, :git
@@ -36,6 +36,7 @@ set :deploy_to, '/root/'
 
 # Default value for keep_releases is 5
 # set :keep_releases, 5
+after "deploy:update_code","deploy:dbyml_symlink"
 
 namespace :deploy do
 
@@ -45,6 +46,12 @@ namespace :deploy do
       # Your restart mechanism here, for example:
       # execute :touch, release_path.join('tmp/restart.txt')
     end
+  end
+
+  desc 'Sym link the database.yml with secret passwords from shared dir to deploy dir'
+  task :dbyml_symlink do
+    rm #{release_path}/config/database.yml && 
+    ln -nfs #{deploy_to}/#{shared_dir}/config/database.yml #{release_path}/config/database.yml
   end
 
   after :publishing, :restart
