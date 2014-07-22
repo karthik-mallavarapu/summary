@@ -17,6 +17,8 @@ set :deploy_to, '/home/deploy/deployment'
 set :rails_env, :production
 # Sym links database.yml file from shared dir
 set :linked_files, %w{config/database.yml}
+
+set :default_env, { rvm_bin_path: '~/.rvm/bin' }
 # Default value for :scm is :git
 # set :scm, :git
 
