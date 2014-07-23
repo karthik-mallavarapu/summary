@@ -1,5 +1,5 @@
 digest_generator:
-  cron: "30 0-23/2 * * *"
+  cron: "30 0,4,8,12,16,20 * * *"
   class: DigestGenerator
   args:
   description: Generates a new digest every 2 hours.
