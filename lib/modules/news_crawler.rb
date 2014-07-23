@@ -4,6 +4,9 @@ require 'matrix'
 module NewsCrawler
   extend self
 
+  DOUBLE_QUOTES = /[\”\“]/
+  SINGLE_QUOTES = /[\’\‘]/
+
   BASE_URL = 'http://www.thehindu.com/template/1-0-1/widget/archive/archiveWebDayRest.jsp?'
 
   def get_article_urls(date='today')
@@ -56,7 +59,10 @@ module NewsCrawler
   end
 
   def get_title(page)
-    page.css('h1.detail-title').text
+    title = page.css('h1.detail-title').text
+    title.gsub!(DOUBLE_QUOTES, "\"")
+    title.gsub!(SINGLE_QUOTES, "'")
+    return title
   end
 
   def get_text(page)
@@ -64,7 +70,10 @@ module NewsCrawler
     page.css('div.article-text p.body').each do |p|
       text << p.text
     end
-    return text.join(' ')
+    text = text.join(' ')
+    text.gsub!(DOUBLE_QUOTES, "\"")
+    text.gsub!(SINGLE_QUOTES, "'")
+    return text
   end
 
   def get_img(page)

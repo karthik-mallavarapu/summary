@@ -45,7 +45,7 @@ class NewsDigest < ActiveRecord::Base
       articles = Hash.new
       subtopics.each do |topic, count|
         delete_similar_articles(topic)
-        articles[topic] = Article.where(topic: topic, edition: Chronic.parse(@date).strftime('%B %d'))
+        articles[topic] = Article.where(["created_at > ?", 24.hours.ago]).where(topic: topic)
         delete_similar_articles(articles[topic])
       end
       @news_articles[main] = articles
@@ -58,7 +58,7 @@ class NewsDigest < ActiveRecord::Base
   end
 
   def delete_similar_articles(topic)
-    articles = Article.where(topic: topic, edition: Chronic.parse(@date).strftime('%B %d'))
+    articles = Article.where(["created_at > ?", 24.hours.ago]).where(topic: topic)
     corpus = []
     articles.each do |article|
       corpus << TfIdfSimilarity::Document.new(article.content)
@@ -72,8 +72,18 @@ class NewsDigest < ActiveRecord::Base
         end
         if similarity_matrix[i][j] > 0.35
           article = (articles[i].last_updated > articles[j].last_updated)? articles[j] : articles[i]
+          delete_article_from_digest(article.url)
           article.delete
         end
+      end
+    end
+  end
+
+  def delete_article_from_digest(article_url)
+    digests = NewsDigest.where(["created_at > ?", 24.hours.ago])
+    digests.each do |digest|
+      if !digest.articles.find_by_url(article_url).nil?
+        digest.articles.find_by_url(article_url).delete
       end
     end
   end
@@ -89,6 +99,13 @@ class NewsDigest < ActiveRecord::Base
             article.url = url
             article.add_summary
             article.edition = Chronic.parse(@date).strftime('%B %d')
+            if article.img == '/assets/no.png'
+              if topic == 'Markets'||topic == 'Economy'||topic == 'Industry'
+                article.img = '/assets/sensex.jpg'
+              elsif topic == 'Cricket'
+                article.img = '/assets/cricket.jpg'
+              end
+            end
             article.save
           end
         rescue Exception => e

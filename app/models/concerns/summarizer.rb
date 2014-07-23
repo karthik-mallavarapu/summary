@@ -3,7 +3,7 @@ module Summarizer
   extend ActiveSupport::Concern
   include Treat::Core::DSL
 
-  WORD_SANITIZE = /\A[-,:;*^()\/&%{}$!@#=\"'?\”\“]+|[-,:;*^()\/&%{}$!@#=\"'?\”\“]+\z/
+  WORD_SANITIZE = /\A[-,:;*^()\/&%{}$!@#=\’\"'?\”\“]+|[-,:;*^()\/&%{}$!@#=\’\"'?\”\“]+\z/
 
   def summarize(title, content)
     @sentence_stems = []
