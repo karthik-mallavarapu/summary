@@ -6,6 +6,9 @@ module Summarizer
   WORD_SANITIZE = /\A[-,:;*^()\/&%{}$!@#=\’\"'?\”\“]+|[-,:;*^()\/&%{}$!@#=\’\"'?\”\“]+\z/
 
   def summarize(title, content)
+    if word_count(content) < 100
+      return content
+    end
     @sentence_stems = []
     @sentence_similarity_scores = []
     temp = Tempfile.new("article")
@@ -13,7 +16,7 @@ module Summarizer
     temp.close
     @text = document(temp.path)
     @text.apply(:chunk, :segment, :tokenize)
-    stopwords
+    @stop_words = Konstants.stop_words
     @title_stem = title_stem(title)
     sentence_stems
     sentence_similarity
@@ -70,6 +73,21 @@ module Summarizer
     return summary.join(" \n\n").gsub(/[\"'\”\“]/, '')
   end
 
+  def get_quotations(content)
+    start_quotes = /\A[\"]/
+    end_quotes = /[\"]\z/
+    words = content.split(' ')
+    search_pattern = start_quotes
+    indices = []
+    words.each_index do |i|
+      if matches?(words[i], search_pattern) 
+        indices << i
+        search_pattern = end_quotes
+      end
+    end
+    return words[indices[0]..indices[1]].join(' ')
+  end
+
   private
 
   # Iterate through all the sentences to remove stop words and store stems of words.
@@ -77,6 +95,10 @@ module Summarizer
     @text.sentences.each do |sentence|   
       @sentence_stems << sanitize_sentence(sentence)
     end
+  end
+
+  def matches?(string, pattern)
+    !!(string =~ pattern)
   end
 
   def title_stem(title)
@@ -113,15 +135,6 @@ module Summarizer
       score = 0.0
     end
     return score
-  end
-
-  def stopwords
-    @stop_words = []
-    f = File.open("config/stopwords.txt", 'r')
-    f.each_line do |line|
-      @stop_words << line.rstrip
-    end
-    f.close
   end
 
   def word_count(sentence)
