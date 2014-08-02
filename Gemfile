@@ -15,7 +15,8 @@ gem 'therubyracer'
 gem 'twitter-bootstrap-rails'
 gem 'bootstrap-sass'
 gem 'angular-rails'
-gem 'font-awesome-sass'
+gem 'friendly_id'
+gem 'font-awesome-rails'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

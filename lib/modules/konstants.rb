@@ -17,9 +17,4 @@ module Konstants
     return news_topics
   end
 
-  def topic_limits
-    topic_limits = YAML.load_file("#{Rails.root}/config/topics.yml")['Limits']
-    return topic_limits
-  end
-
 end

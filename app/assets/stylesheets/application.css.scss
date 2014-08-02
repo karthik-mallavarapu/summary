@@ -17,91 +17,17 @@
  *= require flipclock
  */
 
-//.main-content-area {
-//  border-right: 1px dashed #333;
-//}
+@import url(http://fonts.googleapis.com/css?family=Merriweather+Sans:300);
+@import url(http://fonts.googleapis.com/css?family=Merriweather+Sans:700);
+@import url(http://fonts.googleapis.com/css?family=Vollkorn);
 
-.main-heading { 
-  margin-top:30px;
-  text-align: left;
- }
-
- .article {
-  margin-top: 40px;
- }
-
- .slide.ng-hide-add,
-.slide.ng-hide-remove {
-  -webkit-transition: all 1.0s ease-in-out;
-  -moz-transition: all 1.0s ease-in-out;
-  -o-transition: all 1.0s ease-in-out;
-  transition: all 1.0s ease-in-out;
-  display: block!important;
+body {
+  #background-color: #FFF0E0;
 }
-.slide.ng-hide-add.ng-hide-add-active,
-.slide.ng-hide-remove {
-  opacity: 0;
-}
-.slide.ng-hide-add,
-.slide.ng-hide-remove.ng-hide-remove-active {
-  opacity: 1;
-}
-
-.slider-img {
-  background-position: center;
-  width: 450px;
-  height: 330px;
-  margin-left: 100px;
-  margin-top: 10px;
-}
-
-.slider-title {
-  font-family: bariol;
-  color: #1f57a5;
-  margin-top: 0px;
-  margin-right: -20px;
-}
-.jumbotron {
-  background:transparent;
-}
-
-.panel-digest { 
-  height: 600px;
-  .digest {
-    margin-top: 10px;
-    margin-left: 20px;
-    margin-right: 20px;
-  }
-  .caption {
-    margin-top: 10px;
-  }
- }
-
- .slider-size {
-  height: 400px;
- }
-
- .slide-btns {
-  position: relative;
-  margin-bottom: 20px;
- }
- 
- .slider-text {
-  position: relative;
-  margin-bottom: 20px;
-  margin-top: 20px; 
-  margin-left: 10px;
-  font-size: 14px;
- }
-
- .slider-src {
-  position: relative;
-  margin-bottom: 30px;
- }
 
 #footer {
   position: relative;
-  margin-bottom: -100px;
+  margin-bottom: -50px;
   height: 150px;
   clear:both;
   padding-top: 100px;
@@ -109,52 +35,38 @@
 
 #navbar {
   background: transparent;
+  .container-fluid {
+    background: transparent;
+    .navbar-collapse {
+      margin-top: 50px;
+      margin-left: 200px;
+      margin-right: 200px;
+    }
+  }
+  
 }
 
-.navbar-default .navbar-brand {
-  color: #1f57a5;
+#navbar .navbar-nav > li > a {
+  font-size: 20px;
+  font-family: 'Vollkorn', Georgia, Times, serif;
+  
 }
 
-.news-article {
-  position: relative;
-  margin-top: 20px;
-  margin-bottom: 30px;
-  overflow: visible;  
-  min-height: 170px;
+#navbar .navbar-nav > li > a:hover {
+  border-bottom: dashed 1px red;
 }
 
-.main-title {
-  font-family: bariol;
-  color: #1f57a5; 
+
+.navbar-brand > img {
+  width: 100px;
+  height: 50px;
+  margin-left: 100px;
+  margin-top: 30px;
 }
 
-.article-title {
-  font-size: 24px;
-  color: #1f57a5;
-  margin-left: 20px;
+.main-heading { 
+  margin-top:30px;
   text-align: left;
-}
+ }
 
-.article-text {
-  margin-left: 20px;
-  font-family: bariol;
-  font-size: 16px;
-  text-align: left;
-}
-
-.article-img {
-  margin-top: 20px;
-  margin-right: 20px;
-  width: 180px;
-  height: 130px;    
-}
-
-.source {
-  float: right;
-  font-style: italic;
-  margin-bottom: 30px;
-}
-
-.border {
-  border-top: 5px solid #1f57a5;
-}
+ 

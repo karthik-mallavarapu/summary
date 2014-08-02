@@ -1,0 +1,156 @@
+// Place all the styles related to the category controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+#news-carousel {
+
+  height: 500px;
+  width: 800px;
+  #margin-top: 50px;
+  margin-left: 150px;
+
+  .carousel-img {  
+    width: 500px;
+    height: 350px;
+    margin-left: 150px;
+  }
+
+  .carousel-title {
+    margin-left: 50px;
+    font-size: 22px;
+    font-family: 'Merriweather Sans', sans-serif;
+    font-weight: 600;
+  }
+
+  .carousel-text {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 50px;
+    font-family: 'Merriweather Sans', sans-serif;
+  }
+
+  .carousel-control.left, .carousel-control.right {
+    background-image: none;
+    span {
+      color: black;
+    }
+  }
+
+  .carousel-inner {
+    margin-bottom: 50px;
+  }
+
+  .carousel-indicators {
+    bottom: -30px;  
+
+    li {
+      background-color: rgba(70,70,70,.25);      
+    }
+    .active {
+        background-color: #3686be;
+      }
+  }
+
+ }
+ 
+ .news-details {
+
+  $topics: national world sports business other;
+  $colors: #CF3E3E #2162A3 #008A2E #8A5CE6 #FF9900;
+
+  @for $i from 1 through length($topics) {
+    .#{nth($topics, $i)} {
+      color: #{nth($colors, $i)};
+      #font-family: Helvetica;
+      font-family: 'Merriweather Sans', sans-serif;
+    }
+  }
+
+  margin-top: 50px;
+
+  .thumbnail {
+    height: 448px;
+    overflow: scroll;
+  }
+
+  .thumb-img {
+    margin-top: 20px;
+    width: 262px;
+    height: 216px;
+  }
+
+  .thumb-title {
+    font-size: 20px;
+    font-family: 'Merriweather Sans', sans-serif;
+    font-weight: 600;
+  }
+
+  .thumb-summary {
+    font-size: 14px;
+    line-height: 18px;
+    font-family: 'Merriweather Sans', sans-serif;
+  }
+
+ }
+
+ .article {
+  margin-top: 40px;
+ }
+
+ .popover {
+  position: relative;
+  display: none;
+  float: relative;
+  z-index: 990;
+  width: 260px;
+  #margin-right: 40px;
+  margin-top: -130px;
+}
+
+
+.news-article {
+  position: relative;
+  margin-top: 20px;
+  margin-bottom: 30px;
+  overflow: visible;  
+  min-height: 170px;
+}
+
+.main-title {
+  #font-family: bariol;
+  font-family: 'Vollkorn', Georgia, Times, serif;
+  font-size: 48px;
+  #color: #1f57a5; 
+  color: #3686be;
+}
+
+.article-title {
+  font-size: 24px;
+  color: #1f57a5;
+  margin-left: 20px;
+  text-align: left;
+}
+
+.article-text {
+  margin-left: 20px;
+  font-family: bariol;
+  font-size: 16px;
+  text-align: left;
+}
+
+.article-img {
+  margin-top: 20px;
+  margin-right: 20px;
+  width: 180px;
+  height: 130px;    
+}
+
+.source {
+  float: right;
+  font-style: italic;
+  margin-bottom: 30px;
+}
+
+.border {
+  border-top: 5px solid #1f57a5;
+}

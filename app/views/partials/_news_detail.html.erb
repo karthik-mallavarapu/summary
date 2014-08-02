@@ -1,4 +1,4 @@
-<h2 class="main-title">Top Stories</h2>
+<h2 class="main-title"><%= @title.capitalize%></h2>
 <div class="news-detail">
   <% @articles.each do |article| %>
     <div class="news-article border">      
@@ -6,7 +6,7 @@
         <img src=<%= article.img %> class="article-img pull-left">
       </div>
       <div>
-        <h3 class="article-title"><%= article.title %></h3>
+        <h3 class="article-title"><%= link_to article.title, category_article_path(@title, article.slug) %></h3>
         <p class="article-text"><%= article.summary %></p>
         <small class="source">Read more at <a target='_blank' href=<%= article.url %>>The Hindu</a></small>
       </div>

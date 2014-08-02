@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140721150732) do
+ActiveRecord::Schema.define(version: 20140731201516) do
 
   create_table "articles", force: true do |t|
     t.string   "title"
@@ -21,17 +21,21 @@ ActiveRecord::Schema.define(version: 20140721150732) do
     t.datetime "updated_at"
     t.string   "url"
     t.string   "img"
-    t.decimal  "score",                    precision: 10, scale: 0
-    t.integer  "news_digest_id"
-    t.string   "topic"
-    t.integer  "last_updated",   limit: 8
+    t.decimal  "score",                   precision: 10, scale: 0
+    t.integer  "last_updated",  limit: 8
     t.string   "edition"
+    t.integer  "category_id"
+    t.string   "slug"
+    t.text     "short_summary"
   end
 
-  create_table "news_digests", force: true do |t|
+  add_index "articles", ["category_id"], name: "index_articles_on_category_id", using: :btree
+  add_index "articles", ["slug"], name: "index_articles_on_slug", using: :btree
+
+  create_table "categories", force: true do |t|
+    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "edition"
   end
 
 end
