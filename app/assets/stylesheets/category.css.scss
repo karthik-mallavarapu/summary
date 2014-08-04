@@ -2,6 +2,13 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.main-title {
+  font-family: 'Vollkorn', Georgia, Times, serif;
+  font-size: 46px;
+  color: #1f57a5; 
+  #color: #3686be;
+}
+
 #news-carousel {
 
   height: 500px;
@@ -97,44 +104,28 @@
   margin-top: 40px;
  }
 
- .popover {
-  position: relative;
-  display: none;
-  float: relative;
-  z-index: 990;
-  width: 260px;
-  #margin-right: 40px;
-  margin-top: -130px;
-}
-
-
 .news-article {
-  position: relative;
-  margin-top: 20px;
-  margin-bottom: 30px;
-  overflow: visible;  
-  min-height: 170px;
-}
-
-.main-title {
-  #font-family: bariol;
-  font-family: 'Vollkorn', Georgia, Times, serif;
-  font-size: 48px;
-  #color: #1f57a5; 
-  color: #3686be;
+  border-radius: 0px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border: 0;
+  background: #F7F7F7;
+  border-bottom: solid #666666;
+  h3 a {
+    color: black;
+    font-weight: bold;
+  }
 }
 
 .article-title {
-  font-size: 24px;
-  color: #1f57a5;
+  font-size: 20px;
   margin-left: 20px;
   text-align: left;
 }
 
 .article-text {
   margin-left: 20px;
-  font-family: bariol;
-  font-size: 16px;
+  font-size: 14px;
   text-align: left;
 }
 

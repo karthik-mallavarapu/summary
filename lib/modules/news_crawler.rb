@@ -83,7 +83,6 @@ module NewsCrawler
     elsif img = page.at_css('div#pic img')
       return img['src']
     end
-    return '/assets/no.png'
   end
 
   def get_last_updated(page)
