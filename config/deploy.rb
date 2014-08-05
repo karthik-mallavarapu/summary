@@ -23,7 +23,7 @@ set :default_env, { rvm_bin_path: '~/.rvm/bin' }
 role :resque_worker, "162.243.194.214"
 role :resque_scheduler, "162.243.194.214"
 
-set :workers, { "digest_gen_queue" => 2 }
+set :workers, { "*" => 2 }
 
 # To ensure resque can start/stop properly between deploys, you'll want to make
 # sure to link the `tmp/pids` directory.
