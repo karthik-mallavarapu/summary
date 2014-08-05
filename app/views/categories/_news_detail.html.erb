@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-md-10">
+    <h2 class="main-title"><%= @title.capitalize%></h2>
+      <% @articles.each_index do |i| %>
+          <div class="panel panel-default news-article">
+            <% if @articles[i].img.nil? %>
+              <div class="row">
+                <div class="col-md-10">
+                  <h3 class="cat-article-title"><%= link_to @articles[i].title, category_article_path(@title, @articles[i].slug)%></h3>
+                  <p class="cat-article-text"><%= @articles[i].short_summary %>
+                    <small class="source">
+                      <%= link_to "Read more", category_article_path(@title, @articles[i].slug), target: '_blank' %>
+                    </small>
+                  </p>
+                  <p><small class="updated pull-left"><%= @updated_times[i]%></small></p>
+                </div>
+              </div>
+            <% else %>
+              <div class="row">
+                <div class="col-md-8">
+                  <h3 class="cat-article-title"><%= link_to @articles[i].title, category_article_path(@title, @articles[i].slug)%></h3>
+                  <p class="cat-article-text"><%= @articles[i].short_summary %>
+                    <small class="source">
+                      <%= link_to "Read more", category_article_path(@title, @articles[i].slug), target: '_blank' %>
+                    </small>
+                  </p>
+                  <p><small class="updated pull-left"><%= @updated_times[i]%></small></p>
+                </div>
+                <div class="col-md-4">
+                  <img src=<%= @articles[i].img %> class="cat-article-img pull-left">
+                </div>
+              </div>
+            <% end %>            
+          </div>
+      <% end %>
+    </div>
+</div>

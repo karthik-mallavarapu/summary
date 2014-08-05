@@ -1,19 +1,40 @@
 <div id="content" class="container" ng-controller="ArticleCtrl">  
-  <div class="row">
+  <div class="row article">
     <div class="col-md-8">
-      <div class="main-content-area">
-        <div class="col-md-9 col-md-offset-1">
-          <div class="main-heading">
-            <h2 class="title"><%= @article.title %></h2>
-          </div>
-          <blockquote><%= h(@article.content).gsub(/\n/, '<br/>').html_safe%></blockquote>
+      <h2 class="article-title"><%= @article.title %></h2>
+      <div class="updated">
+        <p><small class="pull-left"><%= @updated_time%></small></p>
+      </div>
+      <div class="row">
+        <div class="article-text">
+          <% if !@article.img.nil? %>
+            <img class="article-img pull-right" src="<%= @article.img %>">
+          <% end %>
+          <% @article.summary.split("\n\n").each do |line| %>
+            <p>
+              <%= line %>
+            </p>
+          <% end %>          
+          <small class="source pull-left">
+            <%= link_to "The Hindu", @article.url, target: '_blank' %>
+          </small>
+
         </div>
+          
       </div>
     </div>
     <div class="col-md-4">
-      <div class="side-content-area">
-        <h2 class="title">Summary</h2>
-        <blockquote><%= h(@article.summary).gsub(/\n/, '<br/>').html_safe%></blockquote>
+      <div class="panel panel-default more-articles">
+        <div class="panel-heading">
+          Top Articles
+        </div>
+        <div class="panel-body">
+          <% @other_articles.each do |article| %>
+          <p>
+            <%= link_to article.title, category_article_path(@category_name, article.slug) %>
+          </p>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>

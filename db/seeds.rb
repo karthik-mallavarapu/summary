@@ -1,4 +1,4 @@
-# Create a news digest
-n = NewsDigest.new
-n.generate_digest
-n.save
+# Create categories
+['national', 'world', 'business', 'sports', 'miscellaneous'].each do |topic|
+  Category.create(name: topic)
+end

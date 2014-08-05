@@ -1,0 +1,157 @@
+// Place all the styles related to the category controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.main-title {
+  font-family: 'Vollkorn', Georgia, Times, serif;
+  font-size: 46px;
+  color: #1f57a5; 
+  #color: #3686be;
+}
+
+#news-carousel {
+
+  height: 500px;
+  width: 800px;
+  #margin-top: 50px;
+  margin-left: 150px;
+
+  .carousel-img {  
+    width: 500px;
+    height: 350px;
+    margin-left: 150px;
+  }
+
+  .carousel-title {
+    margin-left: 50px;
+    font-size: 22px;
+    font-family: 'Merriweather Sans', sans-serif;
+    font-weight: 600;
+  }
+
+  .carousel-text {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left: 50px;
+    font-family: 'Merriweather Sans', sans-serif;
+  }
+
+  .carousel-control.left, .carousel-control.right {
+    background-image: none;
+    span {
+      color: black;
+    }
+  }
+
+  .carousel-inner {
+    margin-bottom: 50px;
+  }
+
+  .carousel-indicators {
+    bottom: -30px;  
+
+    li {
+      background-color: rgba(70,70,70,.25);      
+    }
+    .active {
+        background-color: #3686be;
+      }
+  }
+
+ }
+ 
+ .news-details {
+
+  $topics: national world sports business other;
+  $colors: #CF3E3E #2162A3 #008A2E #8A5CE6 #FF9900;
+
+  @for $i from 1 through length($topics) {
+    .#{nth($topics, $i)} {
+      color: #{nth($colors, $i)};
+      font-family: 'Merriweather Sans', sans-serif;
+    }
+  }
+
+  margin-top: 50px;
+
+  .thumbnail {
+    height: 448px;
+    overflow: scroll;
+  }
+
+  .thumb-img {
+    margin-top: 20px;
+    width: 262px;
+    height: 216px;
+  }
+
+  .thumb-title {
+    font-size: 20px;
+    font-family: 'Merriweather Sans', sans-serif;
+    font-weight: 600;
+    a {
+      color: #2A5DB0;
+    }
+  }
+
+  .thumb-summary {
+    font-size: 14px;
+    line-height: 18px;
+    font-family: 'Merriweather Sans', sans-serif;
+  }
+
+ }
+
+.news-article {
+  border-radius: 0px;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  border: 0;
+  background: #F7F7F7;
+  border-bottom: solid #666666;
+  h3 a {
+    color: black;
+    font-weight: bold;
+  }
+  .cat-article-title {
+    font-size: 20px;
+    #margin-left: 20px;
+    a {
+    color: #2A5DB0;
+    }
+    text-align: left;
+  }
+
+  .cat-article-text {
+    #margin-left: 20px;
+    font-size: 14px;
+    text-align: left;
+  }
+
+  .cat-article-img {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    width: 260px;
+    height: 200px;    
+  }
+
+  .updated {
+    margin-top: auto;
+    margin-bottom: auto;
+    font-style: italic;  
+  }
+
+}
+
+
+.source {
+  float: right;
+  font-style: italic;
+  margin-bottom: 20px;
+  margin-top: 20px;
+}
+
+.border {
+  border-top: 5px solid #1f57a5;
+}

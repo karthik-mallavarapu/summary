@@ -21,10 +21,11 @@ module NewsCrawler
     # Collect article urls for topics in topics.yml
     begin
       news_topics.each do |main_topic, subtopics|
-        subtopics.each do |topic, count|
+        article_urls[main_topic] = []
+        subtopics.each do |topic|
           if page.css("li[data-section='#{topic}']").size > 0            
             links = page.css("li[data-section='#{topic}'] a").map {|li| li['href']}
-            article_urls[topic] = links
+            article_urls[main_topic] += links
           end
         end
       end
@@ -82,7 +83,6 @@ module NewsCrawler
     elsif img = page.at_css('div#pic img')
       return img['src']
     end
-    return '/assets/no.png'
   end
 
   def get_last_updated(page)

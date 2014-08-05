@@ -1,40 +1,13 @@
 class ArticlesController < ApplicationController
   
-  def index
-    @articles = Article.all
-  end
-
-  def new
-    @article = Article.new
-  end
-
   def show
-    @article = Article.find(params[:id])
-  end
-
-  def create
-    @article = Article.new(article_params)
-    @article.add_metadata
-    if @article.save
-      flash[:notice] = "New article has been created"
-      redirect_to @article
-    else
-      flash[:alert] = "Article has not been created"
-      render action: "new"
-    end
-  end
-
-  def summary
-    @article = Article.new(article_params)
-    summary = @article.get_summary 
-    render json: {summary: summary, status: 'ok'}
+    category = Category.friendly.find(params[:category_id])
+    @article = category.articles.friendly.find(params[:id])
+    @updated_time = "#{@article.last_updated_time} ago"
+    @other_articles = @article.related_articles
+    @category_name = category.name
   end
 
   private
-
-
-  def article_params
-    params.require(:article).permit(:title, :content)
-  end
 
 end

@@ -1,0 +1,28 @@
+<div id="news-carousel" class="carousel slide"><!-- class of slide for animation -->
+    
+    <div class="carousel-inner">
+      <% @digest.each_index do |i| %>
+        <div class="item<%= i==0? ' active': '' %>"><!-- class of active since it's the first item -->
+          <h3 class="carousel-title"><%= @digest[i].title%></h3>
+          <img class="carousel-img" src=<%= @digest[i].img %> />
+          <div class="carousel-text">
+            <p><%= @digest[i].short_summary%></p>
+          </div>
+        </div>
+      <% end %>      
+    </div><!-- /.carousel-inner -->
+    <ol class="carousel-indicators">
+      <% @digest.each_index do |i| %>
+        <li data-target="#news-carousel" data-slide-to="<%= i %>" class="<%= i==0? 'active': '' %>"></li>
+      <% end %>
+    </ol>
+    
+    <!--  Next and Previous controls below 
+          href values must reference the id for this carousel -->
+    <a class="carousel-control left" href="#news-carousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a class="carousel-control right" href="#news-carousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>    
+  </div><!-- /.carousel -->

@@ -1,0 +1,32 @@
+<div id="content" class="container" ng-controller="HomeCtrl">  
+  <section class="headlines">
+    <h2 class="main-title">Top Stories</h2>
+    <%= render "carousel"%>
+  </section>
+  <section class="news-details">
+    <% @latest_articles.each do |topic, articles| %>
+      <% if articles.size != 0 %>
+        <div class="panel panel-default">
+          <div class="panel-heading <%= topic %>">
+            <%= link_to topic.upcase, category_path(topic), class: topic %> <i class="glyphicon glyphicon-chevron-right"></i>
+          </div>
+          <div class="panel-body">
+            <div class="row">  
+              <% articles.each do |article| %>
+                <div class="col-sm-6 col-md-4">
+                  <div class="thumbnail">
+                    <img class="thumb-img" src=<%= article.img %>>
+                    <div class="caption">
+                      <h4 class="thumb-title"><%= link_to article.title, category_article_path(topic, article.slug)%></h4>
+                      <p class="thumb-summary"><%= article.short_summary %></p>
+                    </div>
+                  </div>
+                </div>            
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </section>
+</div>

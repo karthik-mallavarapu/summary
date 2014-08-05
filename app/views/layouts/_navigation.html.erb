@@ -1,18 +1,35 @@
-<nav class="navbar navbar-default" role="navigation" id="navbar">
-  
+<nav class="navbar navbar-default" role="navigation" id="navbar">  
+
   <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href=<%=root_path%>>
+        <img src="/assets/logo.png">
+      </a>    
+    </div>
+
     <div class="collapse navbar-collapse"> 
-      <span class="navbar-brand text-center">News Summary</span>     
-     <!-- <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav default">
         <li>
-          <form class="navbar-form navbar-left" role="form">
-            <div class="form-group">
-              <input type="email" class="form-control" placeholder="Enter email">
-            </div>
-            <a href="#" class="btn btn-primary">Subscribe</a>
-          </form>
-      </li>
-      </ul> -->
+          <a href=<%=root_path%>>
+            <i class="glyphicon glyphicon-home"></i>
+          </a>
+        </li>
+        <li>
+          <%= link_to "National".upcase, category_path("national") %>
+        </li>
+        <li>
+          <%= link_to "World".upcase, category_path("world") %>
+        </li>
+        <li>
+          <%= link_to "Business".upcase, category_path("business") %>
+        </li>
+        <li>
+          <%= link_to "Sports".upcase, category_path("sports") %>
+        </li>
+        <li>
+          <%= link_to "miscellaneous".upcase, category_path("miscellaneous") %>
+        </li>
+      </ul>
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>

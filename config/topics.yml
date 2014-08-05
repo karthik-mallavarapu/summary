@@ -1,21 +1,6 @@
 Topics:
-  Main:
-      'National': 4
-      'World': 2
-      'South Asia': 1
-  Business:
-      'Markets': 2
-      'Industry': 1
-      'Economy': 1
-  Sports:
-      'Cricket': 2
-      'Other Sports': 1
-  Other:
-      'Cinema Plus': 1
-      'Metroplus': 1
-      'Technology': 1
-Limits:
-  Main: 7
-  Business: 3
-  Sports: 2
-  Other: 2
+  national: ['National', 'South India']
+  world: ['World', 'South Asia', 'International']
+  business: ['Markets', 'Industry', 'Economy', 'Infrastructure']
+  sports: ['Cricket', 'Other Sports', 'Football', 'Tennis']
+  miscellaneous: ['Cinema Plus', 'Gadgets', 'Technology', 'Science', 'Health', 'Environment']

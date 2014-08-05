@@ -15,7 +15,9 @@ gem 'therubyracer'
 gem 'twitter-bootstrap-rails'
 gem 'bootstrap-sass'
 gem 'angular-rails'
-gem 'font-awesome-sass'
+gem 'friendly_id'
+gem 'font-awesome-rails'
+gem 'high_voltage', '~> 2.2.1'
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
@@ -31,6 +33,7 @@ gem 'spring',        group: :development
 gem 'treat'
 gem 'scalpel'
 gem 'chronic'
+gem 'chronic_duration'
 gem 'flipclockjs-rails', '~> 0.5.5b.1'
 gem 'resque-scheduler'
 gem 'parallel'

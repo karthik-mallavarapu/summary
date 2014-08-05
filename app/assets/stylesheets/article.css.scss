@@ -1,3 +1,40 @@
 // Place all the styles related to the Article controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.article {
+  
+  .article-title {
+    font-size: 30px;
+    font-weight: 600;
+    #margin-left: 20px;
+    text-align: left;
+  }
+
+  .article-text {
+    margin-left: 20px;
+    margin-top: 20px;
+    font-size: 16px;
+    text-align: left;
+  }
+
+  .article-img {
+    margin-left: 20px;
+    #margin-top: 20px;
+    width: 350px;
+    height: 280px;    
+  }
+
+  .updated {
+    margin-bottom: 30px;
+    margin-top: 10px;
+    font-style: italic;
+  }
+
+}
+
+.more-articles {
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
