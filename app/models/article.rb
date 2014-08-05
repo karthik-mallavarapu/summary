@@ -18,4 +18,14 @@ class Article < ActiveRecord::Base
     self.short_summary = summary.split("\n\n")[0]
   end
   
+  def related_articles
+    category = Category.find(self.category_id)
+    related_articles = category.articles.where(["created_at > ?", 24.hours.ago]).where(["id != ?", self.id]).order('score DESC').limit(5).order('created_at DESC')
+    related_articles
+  end
+
+  def last_updated_time
+    ChronicDuration.output(Time.now - self.created_at, units: 1, format: :long)
+  end
+
 end

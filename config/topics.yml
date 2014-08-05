@@ -1,6 +1,6 @@
 Topics:
   national: ['National', 'South India']
-  world: ['World', 'South Asia']
-  business: ['Markets', 'Industry', 'Economy']
-  sports: ['Cricket', 'Other Sports']
-  other: ['Cinema Plus', 'Metroplus', 'Technology']
+  world: ['World', 'South Asia', 'International']
+  business: ['Markets', 'Industry', 'Economy', 'Infrastructure']
+  sports: ['Cricket', 'Other Sports', 'Football', 'Tennis']
+  miscellaneous: ['Cinema Plus', 'Gadgets', 'Technology', 'Science', 'Health', 'Environment']

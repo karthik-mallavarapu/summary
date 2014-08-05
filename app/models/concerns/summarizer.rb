@@ -59,7 +59,7 @@ module Summarizer
       end
     end
     sorted_weights = weights.sort_by {|key, value| value}
-    summary_len = [(@text.sentences.size / 4.0).round, 3].min
+    summary_len = [(@text.sentences.size / 4.0).round, 5].min
     sen_limit = sorted_weights.size - summary_len
     sorted_summary = sorted_weights[sen_limit..-1].sort
 
@@ -68,9 +68,14 @@ module Summarizer
       if (word_count(summary.join(' ')) + word_count(@text.sentences[sentence[0]].value) > 100)
         break
       end
-      summary << @text.sentences[sentence[0]].value
+      relevant_text = @text.sentences[sentence[0]].value.split(' ')
+      if relevant_text.size < 15
+        next
+      end
+      relevant_text.map! {|w| w.gsub(/\A[\"\’'\”\“]+|[\"\’'\”\“]+\z/, '')}
+      summary << relevant_text.join(' ')
     end
-    return summary.join(" \n\n").gsub(/[\"'\”\“]/, '')
+    return summary.join(" \n\n")
   end
 
   def get_quotations(content)

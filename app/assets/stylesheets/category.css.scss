@@ -68,7 +68,6 @@
   @for $i from 1 through length($topics) {
     .#{nth($topics, $i)} {
       color: #{nth($colors, $i)};
-      #font-family: Helvetica;
       font-family: 'Merriweather Sans', sans-serif;
     }
   }
@@ -90,6 +89,9 @@
     font-size: 20px;
     font-family: 'Merriweather Sans', sans-serif;
     font-weight: 600;
+    a {
+      color: #2A5DB0;
+    }
   }
 
   .thumb-summary {
@@ -98,10 +100,6 @@
     font-family: 'Merriweather Sans', sans-serif;
   }
 
- }
-
- .article {
-  margin-top: 40px;
  }
 
 .news-article {
@@ -115,31 +113,43 @@
     color: black;
     font-weight: bold;
   }
+  .cat-article-title {
+    font-size: 20px;
+    #margin-left: 20px;
+    a {
+    color: #2A5DB0;
+    }
+    text-align: left;
+  }
+
+  .cat-article-text {
+    #margin-left: 20px;
+    font-size: 14px;
+    text-align: left;
+  }
+
+  .cat-article-img {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-right: 20px;
+    width: 260px;
+    height: 200px;    
+  }
+
+  .updated {
+    margin-top: auto;
+    margin-bottom: auto;
+    font-style: italic;  
+  }
+
 }
 
-.article-title {
-  font-size: 20px;
-  margin-left: 20px;
-  text-align: left;
-}
-
-.article-text {
-  margin-left: 20px;
-  font-size: 14px;
-  text-align: left;
-}
-
-.article-img {
-  margin-top: 20px;
-  margin-right: 20px;
-  width: 180px;
-  height: 130px;    
-}
 
 .source {
   float: right;
   font-style: italic;
-  margin-bottom: 30px;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .border {
