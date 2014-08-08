@@ -3,7 +3,7 @@ class CategoriesController < ApplicationController
   def index
     @latest_articles = Hash.new
     Category.all.each do |c|
-      @latest_articles[c.name] = c.articles.where(["created_at > ?", 24.hours.ago]).order('score DESC').where(["img != ?", 'nil']).limit(3)
+      @latest_articles[c.name] = c.articles.where(["created_at > ?", 15.hours.ago]).order('score DESC').where(["img != ?", 'nil']).limit(3).sort_by(&:created_at).reverse
     end
     @digest = []
     @latest_articles.each do |topic, articles|
@@ -13,7 +13,7 @@ class CategoriesController < ApplicationController
 
   def show
     category = Category.friendly.find(params[:id])
-    @articles = category.articles.where(["created_at > ?", 24.hours.ago]).order('score DESC').limit(10).order('created_at DESC')
+    @articles = category.articles.where(["created_at > ?", 24.hours.ago]).order('score DESC').limit(10).sort_by(&:created_at).reverse
     @updated_times = []
     @articles.each do |article|
       @updated_times << "#{article.last_updated_time} ago"
