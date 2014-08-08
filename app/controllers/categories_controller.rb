@@ -13,7 +13,7 @@ class CategoriesController < ApplicationController
 
   def show
     category = Category.friendly.find(params[:id])
-    @articles = category.articles.where(["created_at > ?", 24.hours.ago]).order('score DESC').limit(10).sort_by(&:created_at).reverse
+    @articles = category.articles.where(["created_at > ?", 15.hours.ago]).order('score DESC').limit(10).sort_by(&:created_at).reverse
     @updated_times = []
     @articles.each do |article|
       @updated_times << "#{article.last_updated_time} ago"
