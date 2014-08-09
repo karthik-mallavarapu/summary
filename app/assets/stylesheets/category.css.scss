@@ -62,7 +62,7 @@
  
  .news-details {
 
-  $topics: national world sports business other;
+  $topics: national world sports business miscellaneous;
   $colors: #CF3E3E #2162A3 #008A2E #8A5CE6 #FF9900;
 
   @for $i from 1 through length($topics) {
