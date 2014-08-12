@@ -10,6 +10,8 @@ class Article < ActiveRecord::Base
   
   attr_accessor :stem_words
 
+  
+
   include Summarizer
 
   def add_summary
@@ -22,10 +24,6 @@ class Article < ActiveRecord::Base
     category = Category.find(self.category_id)
     related_articles = category.articles.where(["created_at > ?", 24.hours.ago]).where(["id != ?", self.id]).order('score DESC').limit(5).order('created_at DESC')
     related_articles
-  end
-
-  def last_updated_time
-    ChronicDuration.output(Time.now - self.created_at, units: 1, format: :long)
   end
 
 end

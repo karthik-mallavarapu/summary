@@ -3,7 +3,7 @@
     <div class="col-md-8">
       <h2 class="article-title"><%= @article.title %></h2>
       <div class="updated">
-        <p><small class="pull-left"><%= @updated_time%></small></p>
+        <p><small class="pull-left"><%= time_ago_in_words @article.created_at%> ago</small></p>
       </div>
       <div class="row">
         <div class="article-text">

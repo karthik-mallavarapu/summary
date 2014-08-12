@@ -12,7 +12,7 @@
                       <%= link_to "Read more", category_article_path(@title, @articles[i].slug), target: '_blank' %>
                     </small>
                   </p>
-                  <p><small class="updated pull-left"><%= @updated_times[i]%></small></p>
+                  <p><small class="updated pull-left"><%= time_ago_in_words @articles[i].created_at%> ago</small></p>
                 </div>
               </div>
             <% else %>
@@ -24,7 +24,7 @@
                       <%= link_to "Read more", category_article_path(@title, @articles[i].slug), target: '_blank' %>
                     </small>
                   </p>
-                  <p><small class="updated pull-left"><%= @updated_times[i]%></small></p>
+                  <p><small class="updated pull-left"><%= time_ago_in_words @articles[i].created_at%> ago</small></p>
                 </div>
                 <div class="col-md-4">
                   <img src=<%= @articles[i].img %> class="cat-article-img pull-left">
