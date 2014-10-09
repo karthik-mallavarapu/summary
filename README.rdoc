@@ -1,28 +1,27 @@
-== README
+== News-summary
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+News-summary is a Ruby on Rails application that periodically fetches articles from a news website and presents a 
+summarized version of the top news articles. A resque scheduler job fetches latest news articles once every 4 hours and generates a summary for each article. The application implements TextRank, a text-processing algorithm for automatic summarization. The application can be accessed at http://www.news-summary.co.
 
-Things you may want to cover:
+=== Dependencies
 
-* Ruby version
+  * ruby - 2.1.1
 
-* System dependencies
+  * rails - 4.1.1
 
-* Configuration
+  * mysql
 
-* Database creation
+  * redis 
 
-* Database initialization
+  * resque and resque-scheduler
+  
+  * capistrano - 3.2.1 (for deployment)
 
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+=== Instructions
+  * bundle exec rake db:setup (creates the database, loads the schema and seeds the database)
+  * bundle exec rake resque:work (starts a resque worker)
+  * bundle exec rake resque:scheduler (starts the resque scheduler process)
+  
+=== References 
+  * R. Mihalcea and P. Tarau, “TextRank: Bringing Order into Texts,” in Proceedings of EMNLP 2004. Association for Computational Linguistics, 2004, pp. 404–411.
+  * Daniel S. Leite , Lucia H. M. Rino , Thiago A. S. Pardo , Maria Graças , V. Nunes, "Extractive Automatic Summarization: Does more linguistic knowledge make a difference?"
