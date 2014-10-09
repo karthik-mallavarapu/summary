@@ -1,4 +1,5 @@
-<div id="content" class="container" ng-controller="HomeCtrl">  
+<% title "NEWSummary - Short news summaries" %>
+<div id="content" class="container" ng-controller="HomeCtrl">
   <section class="headlines">
     <h2 class="main-title">Top Stories</h2>
     <%= render "carousel"%>
@@ -11,7 +12,7 @@
             <%= link_to topic.upcase, category_path(topic), class: topic %> <i class="glyphicon glyphicon-chevron-right"></i>
           </div>
           <div class="panel-body">
-            <div class="row">  
+            <div class="row">
               <% articles.each do |article| %>
                 <div class="col-sm-6 col-md-4">
                   <div class="thumbnail">
@@ -21,7 +22,7 @@
                       <p class="thumb-summary"><%= article.short_summary %></p>
                     </div>
                   </div>
-                </div>            
+                </div>
               <% end %>
             </div>
           </div>
