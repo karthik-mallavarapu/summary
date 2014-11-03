@@ -3,7 +3,7 @@ module Summarizer
   extend ActiveSupport::Concern
   include Treat::Core::DSL
 
-  WORD_SANITIZE = /\A[-,:;*^()\/&%{}$!@#=\’\"'?\”\“]+|[-,:;*^()\/&%{}$!@#=\’\"'?\”\“]+\z/
+  WORD_SANITIZE = /\A[-,:;*^()\/&%{}$!@#=\’?\”\“]+|[-,:;*^()\/&%{}$!@#=\’?\”\“]+\z/
 
   def summarize(title, content)
     if word_count(content) < 100
@@ -35,16 +35,33 @@ module Summarizer
   end
 
   def generate_summary
-    weights = {}
-    # Add an initial random weight and then iterate
-    d = 0.85
-    random_weight = 0.5
-    @text.sentences.size.times do |i|
-      weights[i] = random_weight
+    sorted_sentences = Hash[weights.sort_by {|key, value| value}.reverse]
+    summary = []
+    sorted_sentences.each do |index, weight|
+      sentence = @text.sentences[index].value
+      next if (word_count(sentence) < 15 || word_count(sentence) >= 100)
+      break if word_count(summary.join(' ') + sentence) >= 100
+      # Removing quotation marks until the multi-sentence quotation issue is fixed
+      sentence = sentence.split(" ").
+      map { |word| word.gsub(/\A([\"]*[\.]*)+|([\"]*[\.]*)\z/, "") }.join(" ")
+      # Removes word quotation and periods from the sentence. So adding the period back.
+      sentence << "."
+      summary << sentence
     end
+    summary.join(" \n\n")
+  end
 
-    # Iterate 50 times to calculate final weights of sentences
-    50.times do
+  def weights
+    weights = {}
+    # Damping factor
+    d = 0.85
+    # Add an initial weight of 1
+    @text.sentences.size.times do |i|
+      weights[i] = 1.0
+    end
+    # Iterate 30 times to calculate final weights of sentences
+    # Convergence curves indicate that error rate is negligible by the 30th iteration
+    30.times do
       @sentence_similarity_scores.each_index do |i|
         scores = @sentence_similarity_scores[i]
         temp = 0.0
@@ -58,26 +75,11 @@ module Summarizer
         weights[i] = (1 - d) + d * temp
       end
     end
-    sorted_weights = weights.sort_by {|key, value| value}
-    summary_len = [(@text.sentences.size / 4.0).round, 5].min
-    sen_limit = sorted_weights.size - summary_len
-    sorted_summary = sorted_weights[sen_limit..-1].sort
-
-    summary = []
-    sorted_summary.each do |sentence|
-      if (word_count(summary.join(' ')) + word_count(@text.sentences[sentence[0]].value) > 100)
-        break
-      end
-      relevant_text = @text.sentences[sentence[0]].value.split(' ')
-      if relevant_text.size < 15
-        next
-      end
-      relevant_text.map! {|w| w.gsub(/\A[\"\’'\”\“]+|[\"\’'\”\“]+\z/, '')}
-      summary << relevant_text.join(' ')
-    end
-    return summary.join(" \n\n")
+    weights
   end
 
+=begin
+TODO
   def get_quotations(content)
     start_quotes = /\A[\"]/
     end_quotes = /[\"]\z/
@@ -85,19 +87,19 @@ module Summarizer
     search_pattern = start_quotes
     indices = []
     words.each_index do |i|
-      if matches?(words[i], search_pattern) 
+      if matches?(words[i], search_pattern)
         indices << i
         search_pattern = end_quotes
       end
     end
     return words[indices[0]..indices[1]].join(' ')
   end
-
+=end
   private
 
   # Iterate through all the sentences to remove stop words and store stems of words.
   def sentence_stems
-    @text.sentences.each do |sentence|   
+    @text.sentences.each do |sentence|
       @sentence_stems << sanitize_sentence(sentence)
     end
   end
@@ -107,9 +109,9 @@ module Summarizer
   end
 
   def title_stem(title)
-    title = sentence title
-    title.tokenize
-    return sanitize_sentence(title)
+    title_token = sentence title
+    title_token.tokenize unless title_token.has_children?
+    return sanitize_sentence(title_token)
   end
 
   def sanitize_sentence(sentence)
@@ -119,7 +121,7 @@ module Summarizer
       word.gsub!(WORD_SANITIZE, '')
       next if word.length == 0
       if !@stop_words.include? word
-        if w.class == Treat::Entities::Word 
+        if w.class == Treat::Entities::Word
           sentence_stem[word.stem] += 1
         end
       end
